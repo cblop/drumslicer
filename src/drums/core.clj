@@ -27,7 +27,7 @@
     [b (slice b start) dur]))
 
 (defsynth pl [b (buffer (:sample-rate (server-info))) start 0 dur 1]
-  (let [env (env-gen (envelope [1 1 0] [dur 0] :linear))
+  (let [env (env-gen (envelope [1 1 0] [dur 0.2] :welch))
         pbuf (play-buf 1 b :start-pos start)]
     (out 0 (* env pbuf))
     ;; (out 0 pbuf)
@@ -59,7 +59,7 @@
 
 (pl loop2 (slice loop2 0) 2)
 (sl loop2 0 16)
-(sl loop1 0 16)
+(sl loop1 0 6)
 
 (let [nome (metronome 100)
       ns (range 0 (count sliced))]
